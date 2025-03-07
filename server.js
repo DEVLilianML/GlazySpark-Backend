@@ -14,7 +14,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Connect to MongoDB
-console.log('MongoDB URI:', process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('MongoDB connected'))
 .catch(err => console.error('MongoDB connection error:', err));
@@ -48,5 +47,8 @@ app.use("/api", blogRoutes);
 
 // Start the server
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    // ✅ Show this log only in development mode
+    if (process.env.NODE_ENV !== 'production') {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    }
 });
