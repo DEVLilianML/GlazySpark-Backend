@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const sitemapRoutes = require('./sitemap');
+const sitemapIndexRoutes = require("./sitemapIndex");
 const blogRoutes = require('./blogRoutes'); 
 
 const app = express();
@@ -43,6 +44,7 @@ app.post('/api/contact', async (req, res) => {
 
 // ✅ Use the sitemap route
 app.use(sitemapRoutes);
+app.use(sitemapIndexRoutes);
 app.use("/api", blogRoutes);
 
 // Start the server
