@@ -6,6 +6,8 @@ require('dotenv').config();
 const sitemapRoutes = require('./sitemap');
 const sitemapIndexRoutes = require("./sitemapIndex");
 const blogRoutes = require('./blogRoutes'); 
+const path = require('path'); // This path is for google verification site
+
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -46,6 +48,11 @@ app.post('/api/contact', async (req, res) => {
 app.use(sitemapRoutes);
 app.use(sitemapIndexRoutes);
 app.use("/api", blogRoutes);
+
+// google site verification
+app.get("/googled78d88d23b1b7b74.html", (req, res) => {
+    res.sendFile(path.join(__dirname, "googled78d88d23b1b7b74.html"));
+});
 
 // Start the server
 app.listen(PORT, () => {
